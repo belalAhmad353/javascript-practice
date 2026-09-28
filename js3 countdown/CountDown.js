@@ -1,4 +1,4 @@
-const endDate = "28 September 2026 10:00 PM"
+const endDate = "29 September 2026 0:57 AM"
 
 document.getElementById("end-date").innerText = endDate;
 const inputs = document.querySelectorAll("input")
@@ -9,6 +9,8 @@ function clock() {
     const diff = end - now;
     console.log(diff);
 
+if ( diff < 0) return;
+
     // convert into days 
     inputs[0].value = (Math.floor(diff / 3600 / 1000 / 24));
     // convert into hours
@@ -17,13 +19,18 @@ function clock() {
     inputs[2].value = (Math.floor(diff / 1000 / 60) % 60)
     // convert into seconds
     inputs[3].value = (Math.floor(diff / 1000) % 60);
-    
-
-
-
 }
+
+// Initial call
 clock();
 
 // 1 day = 24 hours
 // 24 hr = 60 mins
 // 60 mins = 3600 sec
+
+setInterval(
+    ()=> {
+        clock()
+    },
+    1000
+);
